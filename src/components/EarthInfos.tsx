@@ -89,7 +89,7 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
     {
       title: 'Estimated Population',
       value: parseInt(estimatedPopulation.toFixed(0)),
-      unit: '',
+      unit: 'Humans',
     },
     {
       title: 'Orbital Period',
@@ -180,7 +180,7 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
         style={{ height: 'auto', position: 'relative' }}
       >
         <motion.div
-          className="flex flex-col items-center justify-center md:w-1/3"
+          className="flex flex-col items-center justify-center md:w-1/3 mb-4"
           variants={fadeIn('up', 'spring', 0.5, 1)}
           initial="hidden"
           animate="show"
@@ -194,14 +194,14 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
 
         <motion.div
           className="flex flex-col items-center justify-center text-center md:w-1/3"
-          variants={fadeIn('up', 'spring', 1, 1)}
+          variants={fadeIn('up', 'spring', 1 * 0.5, 1)}
           initial="hidden"
           animate="show"
         >
           {infoEarth.map((item, index) => (
             <div key={index} className="mb-4">
               <div className="stat-title text-base-content">{item.title}</div>
-              <div className="stat-value text-secondary-focus">
+              <div className="stat-value text-secondary-focus allow-wrap">
                 {item.unit ? (
                   <CountUp
                     start={0}
@@ -220,18 +220,29 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
       </motion.div>
 
       {/* Continents */}
+      <div className="xl:max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl md:text-7xl gradient-text font-bold tracking-widest leading-tight">
+          Continents
+        </h2>
+      </div>
       <div className="stat">
-        <div className="stat-title">Continents</div>
-        <div className="stat-value text-secondary flex flex-col overflow-auto">
+        <div className="stat-value text-secondary text-center allow-wrap">
           {earthData.continents.join(', ')}
         </div>
       </div>
 
       {/* Atmosphere Composition */}
+      <div className="xl:max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl md:text-7xl gradient-text font-bold tracking-widest leading-tight">
+          Chemical composition
+        </h2>
+      </div>
       {atmosphereComposition.map((item, index) => (
         <div key={index} className="mb-4">
-          <div className="stat-title text-base-content">{item.title}</div>
-          <div className="stat-value text-primary">
+          <div className="stat-title text-base-content text-center">
+            {item.title}
+          </div>
+          <div className="stat-value text-primary text-center">
             {item.unit ? (
               <CountUp
                 start={0}
@@ -249,34 +260,35 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
       ))}
 
       {/* Development Level */}
-      <div className="stat">
-        <div className="stat-title">Development Level</div>
-        <ul>
-          {(
-            Object.entries(earthData['level of development']) as [
-              string,
-              string
-            ][]
-          ).map(([key, value]) => (
-            <li key={key}>
-              {key}: {value}
-            </li>
-          ))}
-        </ul>
+      <div className="container xl:max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl md:text-7xl gradient-text font-bold tracking-widest leading-tight">
+          Development Level
+        </h2>
       </div>
-
-      <h1 className="text-3xl md:text-7xl gradient-text font-bold tracking-widest leading-tight">
-        Moon
-      </h1>
+      {(
+        Object.entries(earthData['level of development']) as [string, string][]
+      ).map(([key, value]) => (
+        <div key={key} className="mb-4">
+          <div className="stat-title text-base-content text-center">{key}</div>
+          <div className="stat-value text-primary text-center allow-wrap">
+            {value}
+          </div>
+        </div>
+      ))}
 
       {/* Moon */}
+      <div className="xl:max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl md:text-7xl gradient-text font-bold tracking-widest leading-tight">
+          Moon
+        </h2>
+      </div>
       <motion.div
         className="orbitron-font flex flex-col md:flex-row items-center justify-center w-full h-full"
         style={{ height: 'auto', position: 'relative' }}
       >
         <motion.div
-          className="flex flex-col items-center justify-center md:w-1/3"
-          variants={fadeIn('up', 'spring', 0.5, 1)}
+          className="flex flex-col items-center justify-center md:w-1/3 mb-4"
+          variants={fadeIn('up', 'spring', 2 * 0.5, 1)}
           initial="hidden"
           animate="show"
         >
@@ -285,7 +297,7 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
 
         <motion.div
           className="flex flex-col items-center justify-center text-center md:w-1/3"
-          variants={fadeIn('up', 'spring', 1, 1)}
+          variants={fadeIn('up', 'spring', 2 * 0.5, 1)}
           initial="hidden"
           animate="show"
         >
@@ -315,8 +327,10 @@ function EarthInfos({ earthData }: { earthData: Earth }) {
       </h1>
 
       <motion.div
-        variants={fadeIn('up', 'spring', 1 * 0.5, 1)}
+        variants={fadeIn('up', 'spring', 3 * 0.5, 1)}
         className="stats stats-vertical lg:stats-horizontal shadow w-full"
+        initial="hidden"
+        animate="show"
       >
         <WorldLineChart population={earthData.dataCategory.population} />
       </motion.div>

@@ -139,3 +139,7 @@ body {
   ); /* Gradient de couleur */
   border-radius: 20px; /* Arrondir les coins de la barre de défilement */
 }
+
+.allow-wrap {
+  white-space: normal;
+}
