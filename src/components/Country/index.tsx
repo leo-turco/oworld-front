@@ -69,7 +69,7 @@ export default function Country() {
 
   return (
     <div
-      className="orbitron-font p-4 flex flex-col items-center justify-center w-full gap-5"
+      className="orbitron-font flex flex-col items-center justify-center w-full gap-5"
       style={
         isSideBarOpen
           ? isLargeScreen

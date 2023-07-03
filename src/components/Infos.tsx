@@ -100,8 +100,8 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
               {radio?.name !== '' ? radio?.name : 'Radio not available'}
             </div>
             {radio?.url_resolved ? (
-              <>
-                <audio controls>
+              <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 mr-4">
+                <audio controls className="w-full">
                   <source
                     src={radio?.url_resolved}
                     type={determineAudioType(radio?.url_resolved)}
@@ -118,7 +118,7 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
                     Website
                   </a>
                 </div>
-              </>
+              </div>
             ) : (
               <div className="stat-actions">
                 <a className="btn btn-sm">
