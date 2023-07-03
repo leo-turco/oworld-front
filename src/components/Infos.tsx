@@ -121,9 +121,7 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
               </div>
             ) : (
               <div className="stat-actions">
-                <a className="btn btn-sm">
-                  No radio URL available for this Country
-                </a>
+                <a className="btn btn-sm">No radio URL available</a>
               </div>
             )}
           </div>

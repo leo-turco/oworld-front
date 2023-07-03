@@ -8,6 +8,11 @@ import { useAppDispatch, useAppSelector } from '../GlobalRedux/hooks';
 import { togglerSideBar } from '../GlobalRedux/store/reducers/home';
 import { resetCountryData } from '../GlobalRedux/store/reducers/country';
 
+/**
+ * SideBar Component.
+ * Renders a sidebar with navigation links and additional information.
+ * @returns {JSX.Element} The rendered sidebar component.
+ */
 function SideBar() {
   const dispatch = useAppDispatch();
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
@@ -23,12 +28,18 @@ function SideBar() {
 
   const [isClient, setIsClient] = useState(false);
 
+  /**
+   * useEffect hook to toggle sidebar state on screen size changes.
+   */
   useEffect(() => {
     if (!isLargeScreen && isSideBarOpen) {
       dispatch(togglerSideBar(false));
     }
   }, [isLargeScreen, isSideBarOpen, dispatch]);
 
+  /**
+   * useEffect hook to set client state to true.
+   */
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -36,6 +47,10 @@ function SideBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const previousLocationRef = useRef(location);
+
+  /**
+   * useEffect hook to reset country data on location change.
+   */
   useEffect(() => {
     const previousPathname = previousLocationRef.current.pathname;
     const currentPathname = location.pathname;
@@ -47,8 +62,31 @@ function SideBar() {
     previousLocationRef.current = location;
   }, [dispatch, location, navigate]);
 
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * useEffect hook to handle clicks outside of the sidebar.
+   */
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        isSideBarOpen &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node) &&
+        !isLargeScreen
+      ) {
+        dispatch(togglerSideBar(false));
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSideBarOpen, dispatch]);
+
   return (
     <aside
+      ref={sidebarRef}
       id="logo-sidebar"
       className={`fixed top-0 left-0 z-50 w-64 h-full orbitron-font transition-transform ${
         isSideBarOpen ? 'translate-x-0' : '-translate-x-full'
