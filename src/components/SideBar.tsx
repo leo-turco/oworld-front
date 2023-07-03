@@ -72,7 +72,8 @@ function SideBar() {
       if (
         isSideBarOpen &&
         sidebarRef.current &&
-        !sidebarRef.current.contains(event.target as Node)
+        !sidebarRef.current.contains(event.target as Node) &&
+        !isLargeScreen
       ) {
         dispatch(togglerSideBar(false));
       }
