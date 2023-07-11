@@ -7,7 +7,7 @@ import axios from 'axios';
  * @type {axios}
  */
 const axiosInstance = axios.create({
-  baseURL: 'https://projet-05-o-world-back-production.up.railway.app/api',
+  baseURL: 'https://www.lodev.tech/api',
 });
 
 axiosInstance.interceptors.request.use(
