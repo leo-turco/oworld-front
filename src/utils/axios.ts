@@ -29,7 +29,6 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    console.log('originalRequest :', originalRequest);
     if (
       error.response &&
       error.response.data.httpCode === 401 &&
