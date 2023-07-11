@@ -59,11 +59,18 @@ function Pictures({ pictures }: PicturesComponentProps) {
         style={{ height: '45rem' }}
       >
         {pictures.length && (
-          <img
-            className="carousel-image w-full h-full object-cover"
-            src={pictures[currentIndex].url}
-            alt={pictures[currentIndex].description}
-          />
+          <>
+            <img
+              className="carousel-image w-full h-full object-cover"
+              src={pictures[currentIndex].url}
+              alt={pictures[currentIndex].description}
+            />
+            <div className="carousel-caption absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 text-white text-center">
+              {pictures.length &&
+                pictures[currentIndex].description.charAt(0).toUpperCase() +
+                  pictures[currentIndex].description.slice(1)}
+            </div>
+          </>
         )}
         <div className="carousel-controls absolute top-1/2 transform -translate-y-1/2 left-5 right-5 flex justify-between">
           <button className="btn btn-circle" onClick={prevSlide}>
