@@ -19,6 +19,10 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
   const [shuffledCelebrities, setShuffledCelebrities] = useState<Celebrity[]>(
     []
   );
+  const infiniteLoadingInfos = useAppSelector(
+    (state) => state.infos.infiniteLoading
+  );
+
   const shuffleArray = (array: Celebrity[]): Celebrity[] => {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i -= 1) {
@@ -37,9 +41,6 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
       setShuffledCelebrities(shuffled.slice(0, 4));
     }
   }, [celebrity]);
-  const infiniteLoadingInfos = useAppSelector(
-    (state) => state.infos.infiniteLoading
-  );
 
   if (infiniteLoadingInfos || (!radio && !insolite && !celebrity)) {
     return <SimpleLoader />;
