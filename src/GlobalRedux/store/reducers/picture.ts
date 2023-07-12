@@ -36,9 +36,7 @@ export const fetchPictures = createAsyncThunk(
   'country/fetchPictures',
   async (countryId: string) => {
     try {
-      const response = await axios.get(
-        `http://194.31.52.173:3000/api/oworld/${countryId}/unsplash`
-      );
+      const response = await axiosInstance.get(`/oworld/${countryId}/unsplash`);
       return response.data;
     } catch (error: string | any) {
       throw new Error(error.response.data.message as string);
