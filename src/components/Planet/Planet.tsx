@@ -59,7 +59,7 @@ function PlanetComponent({ planetData }: { planetData: IPlanet }) {
   const diameter = parseValue(planet.diameter);
 
   const infoItems = [
-    { title: 'Mass' },
+    { title: 'Mass', value: planet.mass },
     {
       title: 'Diameter',
       value: diameter,
