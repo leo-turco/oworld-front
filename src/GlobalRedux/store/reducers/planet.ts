@@ -49,11 +49,21 @@ export const clearPlanetAlert = createAction('planet/clearAlert');
 /**
  * Async thunk to fetch Mercury data.
  */
+
+export const fetchPlanetData = createAsyncThunk(
+  'fetching/fetchPlanetData', // nom de l'action
+  async () => {
+    const response = await axiosInstance.get('/oworld');
+    return response.data;
+  }
+);
+
 export const fetchMercuryData = createAsyncThunk(
   'mercury/fetchMercuryData',
   async () => {
     try {
       const response = await axiosInstance.get('/oworld');
+      console.log('response :', response);
       return response.data.Mercury;
     } catch (error: string | any) {
       throw new Error(error.response.data.message as string);
