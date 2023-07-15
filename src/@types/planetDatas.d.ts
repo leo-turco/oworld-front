@@ -95,7 +95,6 @@ export interface IPlanet {
   averageTemperature: string;
   diameter: string;
   mass: string;
-  moons: Moon[];
   name: string;
   orbitalPeriod: string;
   rotationPeriod: string;
