@@ -7,6 +7,7 @@ import axiosInstance from '../../../utils/axios';
 import { AlertType } from '../../../@types/alert';
 import {
   Earth,
+  IPlanet,
   Jupiter,
   Mars,
   Mercury,
@@ -17,6 +18,7 @@ import {
 } from '../../../@types/planetDatas';
 
 interface PlanetState {
+  planetData: IPlanet;
   mercuryData: Mercury;
   venusData: Venus;
   earthData: Earth;
@@ -31,6 +33,7 @@ interface PlanetState {
 }
 
 const initialState: PlanetState = {
+  planetData: {} as IPlanet,
   mercuryData: {} as Mercury,
   venusData: {} as Venus,
   earthData: {} as Earth,
@@ -183,6 +186,24 @@ export const fetchNeptuneData = createAsyncThunk(
  */
 const planetReducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(fetchPlanetData.pending, (state) => {
+      state.loading = true;
+      state.infiniteLoading = true;
+      state.alert = null;
+    })
+    .addCase(fetchPlanetData.fulfilled, (state, action) => {
+      state.loading = false;
+      state.infiniteLoading = false;
+      state.mercuryData = action.payload;
+    })
+    .addCase(fetchPlanetData.rejected, (state, action) => {
+      state.loading = false;
+      state.infiniteLoading = true;
+      state.alert = {
+        type: 'error',
+        message: action.error.message || 'Unknown error occurred.',
+      };
+    })
     .addCase(fetchMercuryData.pending, (state) => {
       state.loading = true;
       state.infiniteLoading = true;
