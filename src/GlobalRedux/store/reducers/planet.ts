@@ -194,7 +194,7 @@ const planetReducer = createReducer(initialState, (builder) => {
     .addCase(fetchPlanetData.fulfilled, (state, action) => {
       state.loading = false;
       state.infiniteLoading = false;
-      state.mercuryData = action.payload;
+      state.planetData = action.payload;
     })
     .addCase(fetchPlanetData.rejected, (state, action) => {
       state.loading = false;

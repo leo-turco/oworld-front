@@ -92,10 +92,10 @@ export interface Neptune {
 }
 
 export interface IPlanet {
-  averageTemperature: string;
-  diameter: string;
+  averageTemperature: string | any;
+  diameter: string | any;
   mass: string;
   name: string;
-  orbitalPeriod: string;
-  rotationPeriod: string;
+  orbitalPeriod: string | any;
+  rotationPeriod: string | any;
 }

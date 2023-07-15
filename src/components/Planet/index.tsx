@@ -8,16 +8,17 @@ import { planetText } from '../../utils/planetText';
 
 import SimpleLoader from '../SimpleLoader';
 import { useParams } from 'react-router-dom';
+import PlanetComponent from './Planet';
 
 export default function Planet() {
   const dispatch = useAppDispatch();
   const { name } = useParams();
   const isSideBarOpen = useAppSelector((state) => state.home.sideBar);
   const planetWidth = useAppSelector((state) => state.home.currentWidth);
+  const planetData = useAppSelector((state) => state.planet.planetData);
   const loading = useAppSelector((state) => state.planet.loading);
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
-
-  const planetInfo = planetText[0][name];
+  const planetInfo = planetText[0][name as keyof (typeof planetText)[0]];
 
   useEffect(() => {
     dispatch(fetchPlanetData());
@@ -42,6 +43,7 @@ export default function Planet() {
         </h1>
       </div>
       <p className="px-4 md:px-16 text-justify">{planetInfo.text}</p>
+      <PlanetComponent planetData={planetData} />
     </div>
   );
 }

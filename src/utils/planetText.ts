@@ -24,5 +24,9 @@ export const planetText = [
       name: 'Neptune',
       text: 'Neptune is the eighth and farthest planet from the Sun in the Solar System. Like Uranus, it is classified as an ice giant and has a deep blue color due to the methane in its atmosphere. Neptune has a dynamic atmosphere with large storms and high-speed winds. It has several moons, with Triton being the largest.',
     },
+    uranus: {
+      name: 'Uranus',
+      text: 'Uranus is the seventh planet from the Sun and is known as an "ice giant". It has a bluish color due to the presence of methane in its atmosphere. Unlike other planets, Uranus has an extreme axial tilt, causing it to rotate on its side.',
+    },
   },
 ];
