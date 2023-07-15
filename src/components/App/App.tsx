@@ -20,6 +20,7 @@ import Country from '../Country';
 import Profil from '../Profile';
 import Administrator from '../Administrator';
 import Legal from '../Legal';
+import Planet from '../Planet';
 
 function App() {
   // Récupération de l'ID du pays depuis l'URL
@@ -42,6 +43,7 @@ function App() {
           <Route path="/uranus" element={<Uranus />} />
           <Route path="/neptune" element={<Neptune />} />
           <Route path="/country/:id" element={<Country />} />
+          <Route path="/oworld/:name" element={<Planet />} />
         </Route>
         {/* 404 Page without Layout */}
         <Route path="/*" element={<Error404 />} />
