@@ -375,7 +375,7 @@ function SideBar() {
             <ul className="flex flex-col justify-start items-start text-white font-semibold">
               <li className="mb-2 w-full">
                 <Link
-                  to="/mercury"
+                  to="/oworld/mercury"
                   className="flex p-2 w-full text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -398,7 +398,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/venus"
+                  to="/oworld/venus"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -444,7 +444,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/mars"
+                  to="/oworld/mars"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -467,7 +467,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/jupiter"
+                  to="/oworld/jupiter"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -490,7 +490,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/saturn"
+                  to="/oworld/saturn"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -513,7 +513,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/uranus"
+                  to="/oworld/uranus"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -536,7 +536,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/neptune"
+                  to="/oworld/neptune"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg

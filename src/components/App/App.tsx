@@ -6,20 +6,14 @@ import '../../styles/orbitron-font.css';
 
 import Home from '../Home';
 import About from '../About';
-import Mercury from '../Mercury';
-import Venus from '../Venus';
 import Earth from '../Earth';
-import Mars from '../Mars';
-import Jupiter from '../Jupiter';
-import Saturn from '../Saturn';
-import Uranus from '../Uranus';
-import Neptune from '../Neptune';
 import Error404 from '../Error404';
 import Layout from '../Layout';
 import Country from '../Country';
 import Profil from '../Profile';
 import Administrator from '../Administrator';
 import Legal from '../Legal';
+import Planet from '../Planet';
 
 function App() {
   // Récupération de l'ID du pays depuis l'URL
@@ -33,15 +27,9 @@ function App() {
           <Route path="/legal" element={<Legal />} />
           <Route path="/profile" element={<Profil />} />
           <Route path="/administrator" element={<Administrator />} />
-          <Route path="/mercury" element={<Mercury />} />
-          <Route path="/venus" element={<Venus />} />
           <Route path="/earth" element={<Earth />} />
-          <Route path="/mars" element={<Mars />} />
-          <Route path="/jupiter" element={<Jupiter />} />
-          <Route path="/saturn" element={<Saturn />} />
-          <Route path="/uranus" element={<Uranus />} />
-          <Route path="/neptune" element={<Neptune />} />
           <Route path="/country/:id" element={<Country />} />
+          <Route path="/oworld/:name" element={<Planet />} />
         </Route>
         {/* 404 Page without Layout */}
         <Route path="/*" element={<Error404 />} />

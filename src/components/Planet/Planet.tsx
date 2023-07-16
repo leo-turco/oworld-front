@@ -1,17 +1,26 @@
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
-import { useAppSelector } from '../GlobalRedux/hooks';
-import { Mercury } from '../@types/planetDatas';
-import { fadeIn } from '../utils/motion';
+import { useAppSelector } from '../../GlobalRedux/hooks';
+import { IPlanet, Mars } from '../../@types/planetDatas';
+import { fadeIn } from '../../utils/motion';
 
-import SimpleLoader from './SimpleLoader';
+import SimpleLoader from './../SimpleLoader';
+import { useParams } from 'react-router-dom';
 
-function MercuryInfos({ mercuryData }: { mercuryData: Mercury }) {
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+function PlanetComponent({ planetData }: { planetData: IPlanet }) {
+  const { name } = useParams();
+  const planetName = name ? capitalizeFirstLetter(name) : '';
+  const planet = planetData[planetName as keyof typeof planetData] || null;
+  console.log('planetData :', planet);
+
   const infiniteLoadingInfos = useAppSelector(
     (state) => state.planet.infiniteLoading
   );
 
-  if (infiniteLoadingInfos || Object.keys(mercuryData).length === 0) {
+  if (infiniteLoadingInfos || Object.keys(planetData).length === 0) {
     return <SimpleLoader />;
   }
 
@@ -44,13 +53,13 @@ function MercuryInfos({ mercuryData }: { mercuryData: Mercury }) {
     return 0;
   };
 
-  const orbitalPeriod = parseValue(mercuryData.orbitalPeriod);
-  const rotationPeriod = parseValue(mercuryData.rotationPeriod);
-  const averageTemperature = parseValue(mercuryData.averageTemperature);
-  const diameter = parseValue(mercuryData.diameter);
+  const orbitalPeriod = parseValue(planet.orbitalPeriod);
+  const rotationPeriod = parseValue(planet.rotationPeriod);
+  const averageTemperature = parseValue(planet.averageTemperature);
+  const diameter = parseValue(planet.diameter);
 
   const infoItems = [
-    { title: 'Mass', value: mercuryData.mass },
+    { title: 'Mass', value: planet.mass },
     {
       title: 'Diameter',
       value: diameter,
@@ -86,8 +95,8 @@ function MercuryInfos({ mercuryData }: { mercuryData: Mercury }) {
       >
         <motion.img
           className="w-96 h-96"
-          src="/planet-mercury.png"
-          alt="planet mercury"
+          src={`/${planetName}.png`}
+          alt={'Picture of ' + planetName}
         />
       </motion.div>
 
@@ -120,4 +129,4 @@ function MercuryInfos({ mercuryData }: { mercuryData: Mercury }) {
   );
 }
 
-export default MercuryInfos;
+export default PlanetComponent;
