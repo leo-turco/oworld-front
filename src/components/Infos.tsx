@@ -19,6 +19,10 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
   const [shuffledCelebrities, setShuffledCelebrities] = useState<Celebrity[]>(
     []
   );
+  const infiniteLoadingInfos = useAppSelector(
+    (state) => state.infos.infiniteLoading
+  );
+
   const shuffleArray = (array: Celebrity[]): Celebrity[] => {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i -= 1) {
@@ -37,9 +41,6 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
       setShuffledCelebrities(shuffled.slice(0, 4));
     }
   }, [celebrity]);
-  const infiniteLoadingInfos = useAppSelector(
-    (state) => state.infos.infiniteLoading
-  );
 
   if (infiniteLoadingInfos || (!radio && !insolite && !celebrity)) {
     return <SimpleLoader />;
@@ -100,8 +101,8 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
               {radio?.name !== '' ? radio?.name : 'Radio not available'}
             </div>
             {radio?.url_resolved ? (
-              <>
-                <audio controls>
+              <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 mr-4">
+                <audio controls className="w-full">
                   <source
                     src={radio?.url_resolved}
                     type={determineAudioType(radio?.url_resolved)}
@@ -118,12 +119,10 @@ function Infos({ radio, insolite, celebrity }: InfosProps) {
                     Website
                   </a>
                 </div>
-              </>
+              </div>
             ) : (
               <div className="stat-actions">
-                <a className="btn btn-sm">
-                  No radio URL available for this Country
-                </a>
+                <a className="btn btn-sm">No radio URL available</a>
               </div>
             )}
           </div>

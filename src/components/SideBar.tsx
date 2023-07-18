@@ -2,14 +2,21 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import { useEffect, useState, useRef } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/hooks';
 import { togglerSideBar } from '../GlobalRedux/store/reducers/home';
 import { resetCountryData } from '../GlobalRedux/store/reducers/country';
 
+/**
+ * SideBar Component.
+ * Renders a sidebar with navigation links and additional information.
+ * @returns {JSX.Element} The rendered sidebar component.
+ */
 function SideBar() {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const countryId = id;
   const isLargeScreen = useMediaQuery({ minWidth: 1024 });
   const isSideBarOpen = useAppSelector((state) => state.home.sideBar);
   const data = useAppSelector((state) => state.country.data);
@@ -23,12 +30,18 @@ function SideBar() {
 
   const [isClient, setIsClient] = useState(false);
 
+  /**
+   * useEffect hook to toggle sidebar state on screen size changes.
+   */
   useEffect(() => {
     if (!isLargeScreen && isSideBarOpen) {
       dispatch(togglerSideBar(false));
     }
   }, [isLargeScreen, isSideBarOpen, dispatch]);
 
+  /**
+   * useEffect hook to set client state to true.
+   */
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -36,6 +49,10 @@ function SideBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const previousLocationRef = useRef(location);
+
+  /**
+   * useEffect hook to reset country data on location change.
+   */
   useEffect(() => {
     const previousPathname = previousLocationRef.current.pathname;
     const currentPathname = location.pathname;
@@ -47,8 +64,31 @@ function SideBar() {
     previousLocationRef.current = location;
   }, [dispatch, location, navigate]);
 
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * useEffect hook to handle clicks outside of the sidebar.
+   */
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        isSideBarOpen &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target as Node) &&
+        !isLargeScreen
+      ) {
+        dispatch(togglerSideBar(false));
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isSideBarOpen, dispatch]);
+
   return (
     <aside
+      ref={sidebarRef}
       id="logo-sidebar"
       className={`fixed top-0 left-0 z-50 w-64 h-full orbitron-font transition-transform ${
         isSideBarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -136,7 +176,7 @@ function SideBar() {
         {/* Fin Accessibilité */}
 
         {/* Debut catégories pour un pays */}
-        {data && (
+        {countryId && (
           <div className="space-y-2 font-medium mt-10 mb-10">
             <div className="flex items-center justify-between">
               <h2 className="self-center text-xl font-semibold whitespace-nowrap shadow-neon">
@@ -170,14 +210,18 @@ function SideBar() {
                 isCountryOpen ? 'max-h-screen' : 'max-h-0'
               }`}
             >
-              <div className="flex items-center justify-center p-2 text-white text-xl font-semibold">
-                <span>{data.name.common}</span>
-                <img
-                  src={data.flags.png}
-                  className="h-6 ml-10 sm:h-7"
-                  alt={data.flags.alt}
-                />
-              </div>
+              {data && (
+                <div className="flex items-center justify-center p-2 text-white text-xl font-semibold">
+                  <span>{data.name.common}</span>
+                  <img
+                    src={data.flags.png}
+                    className="h-6 ml-10 sm:h-7"
+                    alt={data.flags.alt}
+                  />
+                </div>
+              )}
+
+              {/* Menu items */}
               <ul className="flex flex-col justify-start items-start p-2 text-white font-semibold">
                 <li className="mb-2 w-full">
                   <a
@@ -199,6 +243,28 @@ function SideBar() {
                       />
                     </svg>
                     Informations
+                  </a>
+                </li>
+                <li className="mb-2 w-full">
+                  <a
+                    href="#pictures"
+                    className="flex p-2 w-full text-white font-semibold hover:border hover-shadow-neon rounded-lg"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 mr-2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                      />
+                    </svg>
+                    Landscapes
                   </a>
                 </li>
                 <li className="mb-2 w-full">
@@ -309,7 +375,7 @@ function SideBar() {
             <ul className="flex flex-col justify-start items-start text-white font-semibold">
               <li className="mb-2 w-full">
                 <Link
-                  to="/mercury"
+                  to="/oworld/mercury"
                   className="flex p-2 w-full text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -332,7 +398,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/venus"
+                  to="/oworld/venus"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -378,7 +444,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/mars"
+                  to="/oworld/mars"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -401,7 +467,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/jupiter"
+                  to="/oworld/jupiter"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -424,7 +490,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/saturn"
+                  to="/oworld/saturn"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -447,7 +513,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/uranus"
+                  to="/oworld/uranus"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg
@@ -470,7 +536,7 @@ function SideBar() {
 
               <li className="mb-2 w-full">
                 <Link
-                  to="/neptune"
+                  to="/oworld/neptune"
                   className="flex items-center p-2 text-white font-semibold hover:border hover-shadow-neon rounded-lg"
                 >
                   <svg

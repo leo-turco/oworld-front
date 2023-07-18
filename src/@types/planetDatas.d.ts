@@ -90,3 +90,12 @@ export interface Neptune {
   orbitalPeriod: string;
   rotationPeriod: string;
 }
+
+export interface IPlanet {
+  averageTemperature: string | any;
+  diameter: string | any;
+  mass: string;
+  name: string;
+  orbitalPeriod: string | any;
+  rotationPeriod: string | any;
+}

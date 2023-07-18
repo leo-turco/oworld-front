@@ -7,7 +7,7 @@ import axios from 'axios';
  * @type {axios}
  */
 const axiosInstance = axios.create({
-  baseURL: 'https://projet-05-o-world-back-production.up.railway.app/api',
+  baseURL: 'https://www.lodev.tech/api',
 });
 
 axiosInstance.interceptors.request.use(
@@ -16,7 +16,6 @@ axiosInstance.interceptors.request.use(
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
-
     return config;
   },
   (error) => {
@@ -30,7 +29,6 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-
     if (
       error.response &&
       error.response.data.httpCode === 401 &&

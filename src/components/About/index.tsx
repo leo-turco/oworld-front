@@ -19,7 +19,7 @@ export default function About() {
       activeImgUrl:
         'https://ca.slack-edge.com/T04F6TNDUEL-U04FTNQRNAF-2aaf24566a07-512',
       title: 'Benjamin',
-      role: 'Product OWNER / Scrum Master',
+      role: 'Frontend developer',
       gitUrl: 'https://github.com/OSAKA-BEN',
     },
     {
@@ -28,7 +28,7 @@ export default function About() {
       activeImgUrl:
         'https://ca.slack-edge.com/T04F6TNDUEL-U04G62YH909-3419cf2da36e-512',
       title: 'Can',
-      role: 'Lead Dev Front',
+      role: 'Frontend developer',
       gitUrl: 'https://github.com/Canoral',
     },
     {
@@ -37,7 +37,7 @@ export default function About() {
       activeImgUrl:
         'https://ca.slack-edge.com/T04F6TNDUEL-U04H9P6RYQN-425f0318824d-512',
       title: 'Léo',
-      role: 'Technical Lead / Git master',
+      role: 'Frontend developer',
       gitUrl: 'https://github.com/leo-turco',
     },
     {
@@ -46,7 +46,7 @@ export default function About() {
       activeImgUrl:
         'https://ca.slack-edge.com/T04F6TNDUEL-U04GK9G2T3J-888ff9ac7478-512',
       title: 'Loïc',
-      role: 'Lead Dev Back',
+      role: 'Backend developer',
       gitUrl: 'https://github.com/Loic-Dubrion',
     },
   ];

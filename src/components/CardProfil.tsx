@@ -36,7 +36,7 @@ const CardProfil: React.FC<CardProfilProps> = ({
       </h3>
     ) : (
       <div className="absolute bottom-0 p-8 flex justify-start w-full flex-col bg-[rgba(0,0,0,0.8)] rounded-b-[24px]">
-        <div className="flex justify-center items-center w-[60px] h-[60px] rounded-[24px] glassmorphism mb-[16px]">
+        <div className="flex items-center w-[60px] h-[30px] rounded-[24px] glassmorphism mb-[16px]">
           <a
             href={gitUrl}
             target="_blank"
@@ -57,7 +57,7 @@ const CardProfil: React.FC<CardProfilProps> = ({
         <p className="font-normal text-[16px] leading-[20.16px] text-white uppercase">
           {role}
         </p>
-        <h2 className="mt-[24px] font-semibold sm:text-[32px] text-[24px] text-white">
+        <h2 className="font-semibold sm:text-[32px] text-[24px] text-white">
           {title}
         </h2>
       </div>

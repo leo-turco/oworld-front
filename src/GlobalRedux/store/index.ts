@@ -8,17 +8,18 @@ import planetReducer from './reducers/planet';
 import graphReducer from './reducers/graph';
 import flagsReducer from './reducers/flags';
 import infosReducer from './reducers/infos';
+import pictureReducer from './reducers/picture';
 
 const store = configureStore({
   reducer: {
     planet: planetReducer,
-
     country: countryReducer,
     home: homeReducer,
     user: userReducer,
     graph: graphReducer,
     flags: flagsReducer,
     infos: infosReducer,
+    picture: pictureReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
