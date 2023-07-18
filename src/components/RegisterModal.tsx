@@ -9,6 +9,7 @@ import {
 import { CountryIdentity } from '../@types/countryIdentity';
 import { handleError, register } from '../GlobalRedux/store/reducers/user';
 import axiosInstance from '../utils/axios';
+import { Link } from 'react-router-dom';
 
 function RegisterModal() {
   const RegisterModalWidth = useAppSelector((state) => state.home.modalWidth);
@@ -244,12 +245,12 @@ function RegisterModal() {
             <div className="ml-3 text-sm">
               <label htmlFor="terms" className="font-light text-white">
                 I accept the{' '}
-                <a
+                <Link
                   className="text-sm font-medium text-white hover:underline"
-                  href="/legal"
+                  to="/legal"
                 >
                   Terms and Conditions
-                </a>
+                </Link>
               </label>
             </div>
           </div>
